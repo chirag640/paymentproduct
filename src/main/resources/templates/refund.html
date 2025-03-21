@@ -11,10 +11,10 @@
     <p>Your refund has been successfully processed.</p>
 
     <h3>Refund Details:</h3>
-    <p><strong>Refund ID:</strong> ${refundId}</p>
-    <p><strong>Sale ID:</strong> ${saleId}</p>
-    <p><strong>Refund Amount:</strong> ${amount} ${currency}</p>
-    <p><strong>Refund Date:</strong> ${refundDate}</p>
+    <p><strong>Refund ID:</strong> <span th:text="${refundId}">Refund ID</span></p>
+    <p><strong>Sale ID:</strong> <span th:text="${saleId}">Sale ID</span></p>
+    <p><strong>Refund Amount:</strong> <span th:text="${amount}">Amount</span> <span th:text="${currency}">Currency</span></p>
+    <p><strong>Refund Date:</strong> <span th:text="${refundDate}">Refund Date</span></p>
 
     <a href="/">Back to Home</a>
 </body>

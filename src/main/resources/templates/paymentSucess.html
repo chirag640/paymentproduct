@@ -11,12 +11,13 @@
     <p>Thank you for your purchase.</p>
 
     <h3>Transaction Details:</h3>
-    <p><strong>Sale ID:</strong> ${saleId}</p>
-    <p><strong>Amount Paid:</strong> ${amount} ${currency}</p>
+    <p><strong>Sale ID:</strong> <span th:text="${saleId}">Sale ID</span></p>
+    <p><strong>Amount Paid:</strong> <span th:text="${amount}">Amount</span> <span th:text="${currency}">Currency</span></p>
 
     <form action="/payment/refund" method="POST">
-        <input type="hidden" name="saleId" value="${saleId}">
-       
+        <input type="hidden" name="saleId" th:value="${saleId}">
+        <input type="hidden" name="amount" th:value="${amount}">
+        <input type="hidden" name="currency" th:value="${currency}">
         <button type="submit">Request Refund</button>
     </form>
 

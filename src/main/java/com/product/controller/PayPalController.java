@@ -1,7 +1,5 @@
 package com.product.controller;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.api.payments.Refund;
-import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.PayPalRESTException;
 import com.product.entity.Product;
 import com.product.entity.ProductOrder;
@@ -93,10 +90,13 @@ public class PayPalController {
             @RequestParam("PayerID") String payerId,
             Model model) {
         try {
-            Payment payment = payPalService.excecutePayment(paymentId, payerId);
-            System.out.println("Execute: "+payment.toJSON());
+            Payment payment = payPalService.executePayment(paymentId, payerId);
+            System.out.println("Execute: " + payment.toJSON());
             if (payment.getState().equals("approved")) {
                 model.addAttribute("message", "Payment successful!");
+                model.addAttribute("saleId", payment.getTransactions().get(0).getRelatedResources().get(0).getSale().getId());
+                model.addAttribute("amount", payment.getTransactions().get(0).getAmount().getTotal());
+                model.addAttribute("currency", payment.getTransactions().get(0).getAmount().getCurrency());
                 return "paymentSucess";
             }
         } catch (PayPalRESTException e) {
@@ -105,7 +105,6 @@ public class PayPalController {
         }
         return "paymentError";
     }
-
 
     @GetMapping("/cancel")
     public String paymentCancel(Model model) {
@@ -116,13 +115,32 @@ public class PayPalController {
     @GetMapping("/error")
     public String paymentError(Model model) {
         model.addAttribute("message", "An error occurred during payment.");
-        return "error";
+        return "paymentError";
     }
     @GetMapping("/orders")
     public String showOrders(Model model) {
         List<ProductOrder> orders = productOrderService.getAllOrders();
         model.addAttribute("orders", orders);
         return "ordered"; // This refers to ordered.html in templates folder
+    }
+    @PostMapping("/refund")
+    public String refundPayment(
+            @RequestParam String saleId,
+            @RequestParam double amount,
+            @RequestParam String currency,
+            Model model) {
+        try {
+            Refund refund = payPalService.refundPayment(saleId, amount, currency);
+            model.addAttribute("refundId", refund.getId());
+            model.addAttribute("saleId", saleId);
+            model.addAttribute("amount", amount);
+            model.addAttribute("currency", currency);
+            model.addAttribute("refundDate", refund.getCreateTime());
+            return "refund";
+        } catch (PayPalRESTException e) {
+            model.addAttribute("message", "Refund failed: " + e.getMessage());
+            return "paymentError";
+        }
     }
 
     //  @PostMapping("/refund")
