@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful</title>
+</head>
+<body>
+    <h1>Payment Successful!</h1>
+    <p>Thank you for your purchase.</p>
+
+    <h3>Transaction Details:</h3>
+    <p><strong>Sale ID:</strong> ${saleId}</p>
+    <p><strong>Amount Paid:</strong> ${amount} ${currency}</p>
+
+    <form action="/payment/refund" method="POST">
+        <input type="hidden" name="saleId" value="${saleId}">
+       
+        <button type="submit">Request Refund</button>
+    </form>
+
+    <a href="/">Back to Product List</a>
+</body>
+</html>
