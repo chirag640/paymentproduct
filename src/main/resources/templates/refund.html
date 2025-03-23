@@ -2,20 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/static/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Refund Processed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        p {
+            font-size: 16px;
+            color: #333;
+        }
+        .details {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        .details strong {
+            color: #555;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <h1>Refund Processed Successfully</h1>
-    <p>Your refund has been successfully processed.</p>
+    <div class="container">
+        <h1>Refund Processed Successfully</h1>
+        <p>Your refund has been successfully processed.</p>
 
-    <h3>Refund Details:</h3>
-    <p><strong>Refund ID:</strong> <span th:text="${refundId}">Refund ID</span></p>
-    <p><strong>Sale ID:</strong> <span th:text="${saleId}">Sale ID</span></p>
-    <p><strong>Refund Amount:</strong> <span th:text="${amount}">Amount</span> <span th:text="${currency}">Currency</span></p>
-    <p><strong>Refund Date:</strong> <span th:text="${refundDate}">Refund Date</span></p>
+        <div class="details">
+            <h3>Refund Details:</h3>
+            <p><strong>Refund ID:</strong> <span th:text="${refundId}">Refund ID</span></p>
+            <p><strong>Sale ID:</strong> <span th:text="${saleId}">Sale ID</span></p>
+            <p><strong>Refund Amount:</strong> <span th:text="${amount}">Amount</span> <span th:text="${currency}">Currency</span></p>
+            <p><strong>Refund Date:</strong> <span th:text="${refundDate}">Refund Date</span></p>
+        </div>
 
-    <a href="/">Back to Home</a>
+        <a href="/">Back to Home</a>
+    </div>
 </body>
 </html>

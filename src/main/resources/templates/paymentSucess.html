@@ -2,25 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/static/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        p {
+            font-size: 16px;
+            color: #333;
+        }
+        .details {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        .details strong {
+            color: #555;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <h1>Payment Successful!</h1>
-    <p>Thank you for your purchase.</p>
+    <div class="container">
+        <h1>Payment Successful!</h1>
+        <p>Thank you for your purchase.</p>
 
-    <h3>Transaction Details:</h3>
-    <p><strong>Sale ID:</strong> <span th:text="${saleId}">Sale ID</span></p>
-    <p><strong>Amount Paid:</strong> <span th:text="${amount}">Amount</span> <span th:text="${currency}">Currency</span></p>
+        <div class="details">
+            <h3>Transaction Details:</h3>
+            <p><strong>Sale ID:</strong> <span th:text="${saleId}">Sale ID</span></p>
+            <p><strong>Amount Paid:</strong> <span th:text="${amount}">Amount</span> <span th:text="${currency}">Currency</span></p>
+        </div>
 
-    <form action="/payment/refund" method="POST">
-        <input type="hidden" name="saleId" th:value="${saleId}">
-        <input type="hidden" name="amount" th:value="${amount}">
-        <input type="hidden" name="currency" th:value="${currency}">
-        <button type="submit">Request Refund</button>
-    </form>
+        <form action="/payment/refund" method="POST">
+            <input type="hidden" name="saleId" th:value="${saleId}">
+            <input type="hidden" name="amount" th:value="${amount}">
+            <input type="hidden" name="currency" th:value="${currency}">
+            <button type="submit">Request Refund</button>
+        </form>
 
-    <a href="/">Back to Product List</a>
+        <a href="/">Back to Product List</a>
+    </div>
 </body>
 </html>

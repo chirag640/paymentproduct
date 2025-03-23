@@ -4,22 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            color: #4CAF50;
+            margin-top: 20px;
+        }
+        .product-details {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 500px;
+            text-align: center;
+        }
+        .product-details h2 {
+            color: #333;
+        }
+        .product-details img {
+            width: 300px;
+            height: 300px;
+            border-radius: 8px;
+        }
+        .product-details p {
+            font-size: 16px;
+            color: #333;
+        }
+        .product-details button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+        }
+        .product-details button:hover {
+            background-color: #45a049;
+        }
+        .product-details a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .product-details a:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
     <h1>Product Details</h1>
-    <div id="product-details">
+    <div class="product-details">
         <h2 th:text="${product.name}">Product Name</h2>
-        <img th:src="@{'/images/' + ${product.imageUrl}}" alt="Product Image" width="300" height="300">
+        <img th:src="@{'/images/' + ${product.imageUrl}}" alt="Product Image">
         <p th:text="${product.description}">Product Description</p>
-        <p>Price: <span th:text="${product.price}">Price</span></p>
+        <p>Price: $<span th:text="${product.price}">Price</span></p>
         <p>Quantity: <span th:text="${product.quantity}">Quantity</span></p>
-        
         <a th:href="@{/payment/buy/{id}(id=${product.id})}">
-    <button>Buy Now</button>
-	</a>
-
-	 </div>
+            <button>Buy Now</button>
+        </a>
         <a href="/">Back to Product List</a>
+    </div>
 </body>
 </html>
